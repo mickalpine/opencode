@@ -983,6 +983,20 @@ export namespace Config {
   export const Info = z
     .object({
       $schema: z.string().optional().describe("JSON schema reference for configuration validation"),
+      clipboard: z
+        .object({
+          linux: z
+            .object({
+              enablePrimaryCopy: z
+                .boolean()
+                .optional()
+                .default(false)
+                .describe("Copy to primary clipboard in addition to regular clipboard on Linux (Wayland/X11)"),
+            })
+            .optional(),
+        })
+        .optional()
+        .describe("Clipboard configuration"),
       logLevel: Log.Level.optional().describe("Log level"),
       server: Server.optional().describe("Server configuration for opencode serve and web commands"),
       command: z
